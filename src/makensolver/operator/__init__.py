@@ -1,4 +1,5 @@
 from .binary import Divide, Minus, Multiply, Plus
+from .interface import Operator
 
 # Arithmetic
 PLUS = Plus()
@@ -7,7 +8,7 @@ MULTIPLY = Multiply()
 DIVIDE = Divide()
 
 # 演算子のリスト
-ARITHMETIC_OPERATORS = [
+ARITHMETIC_OPERATORS: list[Operator] = [
     PLUS,
     MINUS,
     MULTIPLY,

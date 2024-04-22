@@ -22,8 +22,8 @@ def test_result_print(monkeypatch) -> None:
     expected_print = "available_numbers:  [1, 2, 3]\n"
     expected_print += "target:  8\n"
     expected_print += "result: \n"
+    expected_print += "    No.1: (1 + 3) * 2\n"
 
-    # 1,2,3では7はつくれない
     with monkeypatch.context() as m:
         m.setattr("sys.argv", argv)
         m.setattr("sys.stdout", stdout)

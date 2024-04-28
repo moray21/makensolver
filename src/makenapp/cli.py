@@ -14,6 +14,9 @@ def main() -> None:
         (例) [1, 2, 3]の3つで目標の数字をつくるということ
     target: int
         作成する数字
+    --timeout: float
+        タイムアウト時間(単位: 秒)
+        タイムアウトするまでに探索された結果を返す
     --require_one_result: bool
         オプション
         結果が1つだけでいい場合はオプションを使用する
@@ -42,6 +45,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("available_numbers", nargs="*", type=int)
     parser.add_argument("-t", "--target", type=int, default=10)
+    parser.add_argument("--timeout", default=10, type=float)
     parser.add_argument("--require_one_result", action="store_true")
     parser.add_argument("--special", action="store_true")
 
@@ -55,9 +59,13 @@ def main() -> None:
 
     # 解析
     solver = Solver(
-        require_one_result=args.require_one_result, is_special_rule=args.special
+        sorted(args.available_numbers),
+        args.target,
+        timeout=args.timeout,
+        require_one_result=args.require_one_result,
+        is_special_rule=args.special,
     )
-    result = solver.solve(sorted(args.available_numbers), args.target)
+    result = solver.solve()
 
     # 出力
     print("result: ")

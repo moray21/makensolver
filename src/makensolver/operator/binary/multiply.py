@@ -1,6 +1,6 @@
 import re
 
-from makensolver.operator.interface import BinaryOperator
+from makensolver.operator.interface import BinaryOperator, Number
 
 from .minus import Minus
 from .plus import Plus
@@ -13,20 +13,20 @@ class Multiply(BinaryOperator):
         """
         return "*"
 
-    def __call__(self, x: float, y: float) -> float:
+    def __call__(self, x: Number, y: Number) -> Number:
         """
         演算子を用いて計算する(x 演算子 yの関係)
 
         Parameters
         ----------
-        x: float
+        x: Number
             演算に使用する数値(前側)
-        y: float
+        y: Number
             演算に使用する数値(後側)
 
         Returns
         -------
-        : float
+        : Number
         """
         return x * y
 

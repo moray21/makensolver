@@ -18,6 +18,9 @@ def main() -> None:
         オプション
         結果が1つだけでいい場合はオプションを使用する
         デフォルトは全ての解を再帰的に探索する
+    --special
+        オプション
+        四則演算以外も許可する
 
     Example
     -------
@@ -40,6 +43,7 @@ def main() -> None:
     parser.add_argument("available_numbers", nargs="*", type=int)
     parser.add_argument("-t", "--target", type=int, default=10)
     parser.add_argument("--require_one_result", action="store_true")
+    parser.add_argument("--special", action="store_true")
 
     args = parser.parse_args()
 
@@ -50,7 +54,9 @@ def main() -> None:
     print("target: ", args.target)
 
     # 解析
-    solver = Solver(require_one_result=args.require_one_result)
+    solver = Solver(
+        require_one_result=args.require_one_result, is_special_rule=args.special
+    )
     result = solver.solve(sorted(args.available_numbers), args.target)
 
     # 出力

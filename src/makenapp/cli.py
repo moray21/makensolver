@@ -27,20 +27,28 @@ def main() -> None:
 
     Example
     -------
-    $ python main.py 1 3 3 4 -t 23
-        available_numbers:  [1, 3, 3, 4]
-        target:  23
-        result:
-            No.1: (3 + 3) * 4 - 1
-            No.2: (3 + 3) * 4 - 1
-            No.3: 4 * (3 + 3) - 1
-            No.4: 4 * (3 + 3) - 1
+    $ python main.py 1 1 3 4 -t 10
+    available_numbers:  [1, 1, 3, 4]
+    target:  10
+    result:
+        No.1: (1 + 1) * 3 + 4
+        No.2: 1 + 3 * (4 - 1)
+        No.3: 1 - (1 - 4) * 3
 
-    $ python main.py 1 3 3 4 -t 23 --require_one_result
-        available_numbers:  [1, 3, 3, 4]
-        target:  23
-        result:
-            No.1: (3 + 3) * 4 - 1
+    $ python main.py 1 1 3 4 -t 10 --require_one_result
+    available_numbers:  [1, 1, 3, 4]
+    target:  10
+    result:
+        No.1: (1 + 1) * 3 + 4
+
+    $ python main.py 1 1 3 4 -t 23 --special
+    available_numbers:  [1, 1, 3, 4]
+    target:  23
+    WARNING: timeout. solve have not completed yet.
+    result:
+        No.1: 1 + 1 - 3 + 4 !
+        No.2: 1 + 1 - (3 - 4 !)
+        No.3: (1 + 3) ! - 1 ^ 4
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("available_numbers", nargs="*", type=int)

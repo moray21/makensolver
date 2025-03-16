@@ -1,10 +1,14 @@
 # makensolver
 入力した数字で目標の数字を作ることができる組み合わせを探索するプログラム
 
+## インストール
+```console
+$ pip install git+https://github.com/moray21/makensolver
+```
 
 ## コマンドでの使用方法
 ### コマンドとオプション
-```
+```console
 $ makeN $available_numbers -t $target
 
 available_numbers: list[int]
@@ -25,19 +29,55 @@ target: int
 ```
 
 ### Examples
-```
-$ makeN 1 3 3 4 -t 23
-    available_numbers:  [1, 3, 3, 4]
-    target:  23
-    result:
-        No.1: (3 + 3) * 4 - 1
-        No.2: (3 + 3) * 4 - 1
-        No.3: 4 * (3 + 3) - 1
-        No.4: 4 * (3 + 3) - 1
+```console
+$ makeN 1 3 3 4 -t 10
 
-$ makeN 1 3 3 4 -t 23 --require_one_result
-    available_numbers:  [1, 3, 3, 4]
-    target:  23
-    result:
-        No.1: (3 + 3) * 4 - 1
+available_numbers:  [1, 1, 3, 4]
+target:  10
+result:
+    No.1: (1 + 1) * 3 + 4
+    No.2: 1 + 3 * (4 - 1)
+    No.3: 1 - (1 - 4) * 3
+```
+
+```
+$ makeN 1 3 3 4 -t 10 --require_one_result
+
+available_numbers:  [1, 1, 3, 4]
+target:  10
+result:
+    No.1: (1 + 1) * 3 + 4
+```
+
+```console
+$ makeN 1 1 3 4 -t 23 --special
+
+available_numbers:  [1, 1, 3, 4]
+target:  23
+WARNING: timeout. solve have not completed yet.
+result: 
+    No.1: 1 + 1 - 3 + 4 !
+    No.2: 1 + 1 - (3 - 4 !)
+    No.3: (1 + 3) ! - 1 ^ 4
+```
+
+## 開発
+### インストール
+```console
+$ pip install -e .[dev]
+```
+
+### format
+```console
+$ pysen run format
+```
+
+### lint
+```console
+$ pysen run lint
+```
+
+### test
+```console
+$ coverage run -m pytest  && coverage combine && coverage report -m
 ```

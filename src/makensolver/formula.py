@@ -21,7 +21,11 @@ class Formula:
         try:
             self.__calc_answer_and_str_formula()
         except ZeroDivisionError as e:
-            raise CalculateFailedError(str(e))
+            msg = f"formula: {[str(v) for v in self.values]}"
+            raise CalculateFailedError(msg) from e
+        except OverflowError as e:
+            msg = f"formula: {[str(v) for v in self.values]}"
+            raise CalculateFailedError(msg) from e
 
     def __str__(self) -> str:
         return self.__str_answer
